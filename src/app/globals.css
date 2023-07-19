@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-nav.menu {
+.menu {
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
@@ -24,4 +24,8 @@ nav.menu {
   border-radius: 10px;
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   background-color: #fb3d3d;
+}
+
+.LinksNavbarSwipperWrapper::-webkit-scrollbar {
+  opacity: 0;
 }

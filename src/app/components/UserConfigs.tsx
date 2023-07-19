@@ -24,8 +24,8 @@ const UserConfigs = ({ openConfig }: { openConfig: boolean }) => {
     <div
       className={`userConfigModal w-screen h-[calc(100vh-4.5rem)] sm:h-[calc(100vh-10rem)] overflow-y-auto max-w-sm lg:max-w-xs py-10 lg:mr-10 top-0 right-0 fixed bg-slate-50 lg:mt-16  ${
         openConfig
-          ? " opacity-100 translate-y-0  visible"
-          : "opacity-0 translate-y-[-20px] -z-50 invisible  "
+          ? " opacity-100 translate-y-0 z-50 visible"
+          : "opacity-0 translate-y-[-20px] invisible  "
       } transition-all`}
     >
       <h1 className="text-2xl font-bold text-slate-800 px-8 pb-8 ">

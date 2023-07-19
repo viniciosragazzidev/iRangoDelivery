@@ -2,72 +2,149 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
-
+provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+provider = "postgresql"
+url = env("DATABASE_URL")
 }
+
 model Account {
-  id                 String  @id @default(cuid())
-  userId             String
-  type               String
-  provider           String
-  providerAccountId  String
-  refresh_token      String?  @db.Text
-  access_token       String?  @db.Text
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String?  @db.Text
-  session_state      String?
+id String @id @default(cuid())
+userId String
+type String
+provider String
+providerAccountId String
+refresh_token String? @db.Text
+access_token String? @db.Text
+expires_at Int?
+token_type String?
+scope String?
+id_token String? @db.Text
+session_state String?
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@unique([provider, providerAccountId])
+@@unique([provider, providerAccountId])
 }
 
 model Session {
-  id           String   @id @default(cuid())
-  sessionToken String   @unique
-  userId       String
-  expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+id String @id @default(cuid())
+sessionToken String @unique
+userId String
+expires DateTime
+user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  accounts      Account[]
-  sessions      Session[]
+id String @id @default(cuid())
+name String?
+email String? @unique
+emailVerified DateTime?
+image String?
+accounts Account[]
+sessions Session[]
+company Company[]
+orders Order[]
+
 }
 
 model VerificationToken {
-  identifier String
-  token      String   @unique
-  expires    DateTime
+identifier String
+token String @unique
+expires DateTime
 
-  @@unique([identifier, token])
+@@unique([identifier, token])
 }
 
-model product {
-  id Int @unique @default(autoincrement())
-  name String
-  description String
-  categoryId Int
+model Company {
+id String @id @default(cuid())
+name String
+userId String
+categoryTypeId Int
+document String
+cnpj String?
+email String[]
+address String
+phone String
+website String
+hours String[]
+description String
+typeId String
+logo String
+images String[]
+reviews String[]
+faqs String[]
+product Product[]
+categoryType categoryType @relation(fields: [categoryTypeId], references: [id])
 
+user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
 
-  category category @relation( fields: [categoryId], references: [id])
+model Product {
+id String @id @default(cuid())
+name String
+companyId String
+productCategoryId String
+description String
+options ProductOptions[]
+price Float
+images String[]
+disponible Float
+createdAt DateTime @default(now())
+updatedAt DateTime @updatedAt
+
+company Company @relation(fields: [companyId], references: [id])
+productCategory ProductCategory @relation(fields: [productCategoryId], references: [id])
+}
+model ProductCategory {
+id String @id @default(cuid())
+categoryTypeId Int
+title String
+description String
+product Product[]
+
+categoryType categoryType @relation(fields: [categoryTypeId], references: [id])
 
 }
-model category {
-  id    Int  @unique @default(autoincrement())
-  name String 
-  products product[]
 
+model ProductOptions {
+id String @id @default(cuid())
+productId String
+title String
+images String[]
+description String
+valueAmout String?
+product Product @relation(fields: [productId], references: [id])
+
+}
+
+model Order {
+id String @id @default(cuid())
+userId String
+productId String[]
+quantity Int
+price Float
+createdAt DateTime @default(now())
+updatedAt DateTime @updatedAt
+
+user User @relation(fields: [userId], references: [id])
+
+deliveryAddress String
+paymentMethod String
+orderStatus String
+deliveryDate DateTime
+deliveryTime DateTime
+comments String
+}
+
+/// App
+
+model categoryType{
+id Int @id @default(autoincrement())
+title String
+description String
+companies Company[]
+productCategory ProductCategory[]
 }

@@ -2,17 +2,17 @@ import { NextRequest, NextResponse } from "next/server";
 import prisma from "../../../../prisma/prisma";
 
 export async function POST(request: NextRequest) {
-  const { name, description } = await request.json();
+  const { title, description } = await request.json();
 
-  if (!name) {
+  if (!title) {
     return new NextResponse("O nome da categoria é obrigatório", {
       status: 400,
     });
   }
 
-  const newCategory = await prisma.category.create({
+  const newCategory = await prisma.categoryType.create({
     data: {
-      name,
+      title,
       description,
     },
   });
