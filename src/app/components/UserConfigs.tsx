@@ -1,4 +1,5 @@
-import { useSession } from "next-auth/react";
+import { useSession, signIn, signOut } from "next-auth/react";
+
 import React from "react";
 import {
   BiBuoy,
@@ -8,6 +9,7 @@ import {
   BiHeart,
   BiHelpCircle,
   BiLock,
+  BiLogOut,
   BiPaperPlane,
   BiSlider,
 } from "react-icons/bi";
@@ -22,9 +24,9 @@ const UserConfigs = ({ openConfig }: { openConfig: boolean }) => {
 
   return (
     <div
-      className={`userConfigModal w-screen h-[calc(100vh-4.5rem)] sm:h-[calc(100vh-10rem)] overflow-y-auto max-w-sm lg:max-w-xs py-10 lg:mr-10 top-0 right-0 fixed bg-slate-50 lg:mt-16  ${
+      className={`userConfigModal w-screen z-[9999] h-[calc(100vh-4.5rem)] sm:h-[calc(100vh-6rem)] lg:h-[calc(100vh-10rem)] overflow-y-auto max-w-xs lg:max-w-xs py-10 lg:mr-10 top-0 right-0 fixed bg-slate-50 lg:mt-16  ${
         openConfig
-          ? " opacity-100 translate-y-0 z-50 visible"
+          ? " opacity-100 translate-y-0  visible"
           : "opacity-0 translate-y-[-20px] invisible  "
       } transition-all`}
     >
@@ -32,7 +34,7 @@ const UserConfigs = ({ openConfig }: { openConfig: boolean }) => {
         Olá, {session?.user?.name}
       </h1>
 
-      <nav className="flex flex-col gap-2 text-sm ">
+      <nav className="flex flex-col justify-center  gap-2 text-sm ">
         <li className="px-8 py-4 flex gap-8 items-center cursor-pointer hover:bg-slate-100">
           <span className="text-2xl text-red-500">
             {" "}
@@ -79,6 +81,18 @@ const UserConfigs = ({ openConfig }: { openConfig: boolean }) => {
             <BiLock />
           </span>{" "}
           <span>Segurança</span>
+        </li>
+        <li
+          onClick={() => {
+            signOut();
+          }}
+          className=" flex items-center justify-center py-4 px-8 rounded-md my-3  gap-8  self-center cursor-pointer bg-red-500 hover:bg-red-600 transition-all hover:scale-95 text-slate-50 "
+        >
+          <span className="text-2xl ">
+            {" "}
+            <BiLogOut />
+          </span>{" "}
+          <span>Sair da conta</span>
         </li>
       </nav>
     </div>

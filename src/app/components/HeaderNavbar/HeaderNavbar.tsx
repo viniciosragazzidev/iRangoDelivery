@@ -4,7 +4,6 @@ import Image from "next/image";
 import { BiSearch, BiCurrentLocation, BiChevronDown } from "react-icons/bi";
 import UserManager from "../UserManager";
 import LinksNavbar from "./LinksNavbar";
-import LinksNavbarSwipper from "./LinksNavbarSwipper";
 const HeaderNavbar = () => {
   return (
     <div className="">
@@ -46,7 +45,7 @@ const HeaderNavbar = () => {
         </span>
       </nav>
       <div className="hidden  overflow-x-auto LinksNavbarSwipperWrapper max-xl:flex w-full sm:justify-center items-center py-2 ">
-        <LinksNavbarSwipper />
+        <LinksNavbar />
       </div>
     </div>
   );
