@@ -1,10 +1,11 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import AuthSessionProvider from "./components/AuthSessionProvider";
-import HeaderNavbar from "./components/HeaderNavbar/HeaderNavbar";
-import BottomNavbar from "./components/BottomNavbar";
-import LoadComponent from "./components/LoadComponent";
+import AuthSessionProvider from "./_components/AuthSessionProvider";
+import HeaderNavbar from "./_components/HeaderNavbar/HeaderNavbar";
+import BottomNavbar from "./_components/BottomNavbar";
+import LoadComponent from "./_components/LoadComponent";
+import ReduxProvider from "./redux/reduxProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,15 +20,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <AuthSessionProvider>
-      <html lang="ptBR">
-        <body className={inter.className}>
-          <LoadComponent />
-          <HeaderNavbar />
-          {children}
-          <BottomNavbar />
-        </body>
-      </html>
-    </AuthSessionProvider>
+    <ReduxProvider>
+      <AuthSessionProvider>
+        <html lang="ptBR">
+          <body className={inter.className}>
+            <LoadComponent />
+            <HeaderNavbar />
+            {children}
+            <BottomNavbar />
+          </body>
+        </html>
+      </AuthSessionProvider>
+    </ReduxProvider>
   );
 }

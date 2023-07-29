@@ -45,11 +45,36 @@
 .loadItem span:nth-child(3) {
   animation-delay: 0.3s;
 }
+.animationX {
+  opacity: 0;
+  transform: translateY(-50px);
+  animation: animationShow 0.2s ease forwards;
+  animation-delay: 0.5s;
+}
+
+.animationOpacity {
+  opacity: 0;
+  animation: opacityMax 0.5s ease forwards;
+}
+
 @keyframes animationDot {
   50% {
     transform: translateY(-10px);
   }
   100% {
     transform: translateY(0px);
+  }
+}
+
+@keyframes animationShow {
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes opacityMax {
+  100% {
+    opacity: 1;
   }
 }

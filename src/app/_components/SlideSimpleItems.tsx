@@ -5,19 +5,8 @@ import { AiOutlinePlusCircle } from "react-icons/ai";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
+import { SlideSimpleTypes } from "../_types/types";
 
-export interface SlideSimpleTypes {
-  id: string;
-
-  image: string;
-  name: string;
-  avaliation: string;
-
-  category: string;
-  distance: number;
-  timeSend: [number, number]; // Fixing the timeSend property definition
-  valueSend: number;
-}
 const SlideSimpleItems = ({
   slideItems,
 }: {

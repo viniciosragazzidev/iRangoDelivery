@@ -1,11 +1,9 @@
-import PageHeaderCards from "./components/PageHeaderCards";
-
 // Import Swiper styles
 import "swiper/css";
 
-import SlideSimpleItems, {
-  SlideSimpleTypes,
-} from "./components/SlideSimpleItems";
+import PageHeaderCards from "./_components/PageHeaderCards";
+import SlideSimpleItems from "./_components/SlideSimpleItems";
+import { SlideSimpleTypes } from "./_types/types";
 
 export default function Home() {
   const restaurantes: SlideSimpleTypes[] = [
@@ -164,7 +162,7 @@ export default function Home() {
         <section className="list  flex flex-col items-start px-14  max-sm:px-3 gap-5 ">
           <div className="listTitle w-full  flex justify-between items-center ">
             <h1 className="text-xl font-semibold tracking-wider">
-              Lojas da semana
+              Tops Restaurantes
             </h1>
             <span className="text-red-500 cursor-pointer hover:scale-95 transition-all">
               Ver mais
