@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AppDispatch, RootState } from "./store";
 import { HYDRATE } from "next-redux-wrapper";
+import { RootState } from "./store";
 
 import { CategoryType } from "../_types/types";
 
@@ -31,6 +31,6 @@ export const categoriesSlice = createSlice({
 });
 
 export const { setCategory } = categoriesSlice.actions;
-export const selectCatetegories = (state: RootState) => state.categories;
+export const selectCategories = (state: RootState) => state.categories;
 
 export default categoriesSlice.reducer;
